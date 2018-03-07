@@ -14,10 +14,13 @@ require_once( CUSTOM_POST_TYPE__PLUGIN_DIR . 'class.custom-post-type.php' );
 
 add_action( 'init', function(){
 
-  $custom_post_types = new CustomPostType( array(
-      'post_type' => 'movie'
+  $custom_post_types = new CustomPostType( 'movies', array(
+      'label' => 'Movies',
+      'labels' => array(
+        'name' => 'Movies',
+        'singular_name' => 'Movie'
+      )
   ) );
-
 
   $custom_post_types->init();
 } );
