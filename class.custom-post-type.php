@@ -8,8 +8,6 @@ class CustomPostType {
   public $args = array();
 
   public function __construct( $post_type = '', $args = array() ) {
-    //TODO, check if the post type is available
-
     if ( ! is_string( $post_type ) || $post_type === '' || ! is_array($args) || ! sizeof($args) ) {
       $this->error( 'invalid parameters.' );
     }
@@ -74,7 +72,7 @@ class CustomPostType {
       'capabilities' => array(),
       'map_meta_cap' => null,
       'hierarchical' => false,
-      'supports' => array('tltle', 'editor'),
+      'supports' => array('title', 'editor'),
       'register_meta_box_cb' => null,
       'taxonomies' => array(),
       'has_archive' => false,
