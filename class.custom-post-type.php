@@ -72,7 +72,7 @@ class CustomPostType {
       'capabilities' => array(),
       'map_meta_cap' => null,
       'hierarchical' => false,
-      'supports' => array('title', 'editor'),
+      'supports' => array('title', 'editor', 'thumbnail'),
       'register_meta_box_cb' => null,
       'taxonomies' => array(),
       'has_archive' => false,
