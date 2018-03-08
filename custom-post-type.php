@@ -22,5 +22,5 @@ add_action( 'init', function(){
       )
   ) );
 
-  $custom_post_types->init();
+  $custom_post_types->register_post_type();
 } );

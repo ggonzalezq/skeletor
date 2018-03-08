@@ -11,8 +11,7 @@ class CustomPostType {
     //TODO, check if the post type is available
 
     if ( ! is_string( $post_type ) || $post_type === '' || ! is_array($args) || ! sizeof($args) ) {
-      //TODO, throw error
-      die('Invalid params');
+      $this->error( 'invalid parameters.' );
     }
 
     $this->post_type = $post_type;
@@ -21,8 +20,13 @@ class CustomPostType {
     $this->args = array_replace_recursive($this->get_default_args(), $args);
   }
 
-  public function init(){
-    register_post_type( $this->post_type, $this->args);
+  public function register_post_type(){
+    if ( ! post_type_exists( $this->post_type ) ) {
+      register_post_type( $this->post_type, $this->args);
+    }
+    else {
+      $this->error( sprintf( 'The post name %s is already in use.', $this->post_type ) );
+    }
   }
 
   public function get_default_args() {
@@ -83,5 +87,21 @@ class CustomPostType {
       'rest_base' => false,
       'rest_controller_class' => false,
     );
+  }
+
+  // TODO, move this function to a helper class
+  /**
+   * Helper function for display an error message on the frontend
+   * @param string $message
+   * @return null
+   */
+  public function error( $message = '' ) {
+    if ( ! $message ) {
+      return;
+    }
+
+    add_action( 'admin_notices', function () use ($message){
+      printf( '<div class="notice notice-error"><p>%s</p></div>', $message );
+    } );
   }
 }
